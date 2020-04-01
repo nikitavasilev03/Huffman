@@ -2,39 +2,35 @@
 
 namespace Huffman
 {
-    public class BinaryTree
+    public class HuffmanTree
     {
         private Node Root { get; set; }
 
         public int Frequency { get => sumValue(Root); }
 
-        public BinaryTree()
+        public HuffmanTree()
         {
             Root = new Node();
         }
 
-        public BinaryTree(Node node)
+        public HuffmanTree(Node node)
         {
             Root = node;
         }
 
-        public void AddTreeLeft(BinaryTree tree)
+        public void AddTreeLeft(HuffmanTree tree)
         {
             Root.Left = tree.Root;
         }
 
-        public void AddTreeRight(BinaryTree tree)
+        public void AddTreeRight(HuffmanTree tree)
         {
             Root.Right = tree.Root;
         }
 
-        public void SetCodes()
-        {
-            setCodes(Root);
-        }
-
         public Dictionary<byte, string> GetCodes()
         {
+            setCodes(Root);
             return getCodes(Root, new Dictionary<byte, string>(), "");
         }
 
