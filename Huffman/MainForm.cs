@@ -27,13 +27,17 @@ namespace Huffman
                 string pathOpen = openFileDialog1.FileName;
                 string pathSave = saveFileDialog1.FileName;
 
-                Packer packer = new Packer();
+                //Вариант 1 (Простое сжатие)
+                //Packer packer = new Packer();
+                //var bytes = FileWorker.ReadFile(pathOpen);
+                //packer.Packing(bytes);
+                //FileWorker.SavePackFile(pathSave, packer.TableCodes, packer.Bytes);
 
-                var bytes = FileWorker.ReadFile(pathOpen);
-                packer.Packing(bytes);
-                FileWorker.SavePackFile(pathSave, packer.TableCodes, packer.Bytes);
+                //Вариант 2 (Многоуровневое сжатие)
+                if (!FilePacker.Pack(pathOpen, pathSave, (int)numericUpDown1.Value))
+                    MessageBox.Show("При сжатии произошла ошибка!");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -54,11 +58,15 @@ namespace Huffman
                 string pathOpen = openFileDialog1.FileName;
                 string pathSave = saveFileDialog1.FileName;
 
-                Packer packer = new Packer();
+                //Вариант 1 (Простое сжатие)
+                //Packer packer = new Packer();
+                //FileWorker.ReadPackFile(pathOpen, out var table, out var bytes);
+                //packer.Unpacking(table, bytes);
+                //FileWorker.SaveFile(pathSave, packer.Bytes);
 
-                FileWorker.ReadPackFile(pathOpen, out var table, out var bytes);
-                packer.Unpacking(table, bytes);
-                FileWorker.SaveFile(pathSave, packer.Bytes);
+                //Вариант 2 (Многоуровневое сжатие)
+                if (!FilePacker.UnPack(pathOpen, pathSave))
+                    MessageBox.Show("При разжатии произошла ошибка");
             }
             catch (Exception ex)
             {
