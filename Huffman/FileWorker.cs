@@ -11,6 +11,7 @@ namespace Huffman
             BinaryFormatter formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
             {
+                formatter.Serialize(fs, 0);         //Глубина сжатия
                 formatter.Serialize(fs, table);
                 formatter.Serialize(fs, bytes);
             }
@@ -24,6 +25,7 @@ namespace Huffman
             BinaryFormatter formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
             {
+                int level = (int)formatter.Deserialize(fs);         //Глубина сжатия
                 table = (Dictionary<byte, string>)formatter.Deserialize(fs);
                 bytes = (byte[])formatter.Deserialize(fs);
             }
